@@ -1,0 +1,561 @@
+<html>
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script type='text/javascript'>
+	document.ANALYSIS_DATA = ;
+	document.CALLGRAPH = ;
+	</script>
+
+<body>
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "."</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>
+Package filepath implements utility routines for manipulating filename paths
+in a way compatible with the target operating system-defined file paths.
+It is a modification of the original GO package path/filepath solving
+severe errors in handling symbolic links.
+</p>
+<p>
+The original package defines a function Clean that formally normalizes
+a file path by eliminating .. and . entries. This is done WITHOUT
+observing the actual file system. Although this is no problem for
+the function itself, because it is designed to do so, it becomes a severe
+problem for the whole package, because nearly all functions internally use
+Clean to clean the path. As a consequence even functions like Join deliver
+corrupted invalid results for valid inputs if the path incorporates
+symbolic links to directories. Especially EvalSymlinks cannot be used
+to evaluate paths to existing files, because Clean is internally used to
+normalize content of symbolic links.
+</p>
+<p>
+This package provides a set of functions that do not hamper the meaning
+of path names keeping the rest of the original specification as far as
+possible. Additionally some new functions (like Canonical) or alternate
+versions of existing functions (like Split2) are provided
+that offer a more useful specification than the original one.
+</p>
+
+			</div>
+		</div>
+		
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="#pkg-constants">Constants</a></dd>
+			
+			
+			
+				
+				<dd><a href="#Abs">func Abs(path string) (string, error)</a></dd>
+			
+				
+				<dd><a href="#Base">func Base(path string) string</a></dd>
+			
+				
+				<dd><a href="#Canonical">func Canonical(path string, exist bool) (string, error)</a></dd>
+			
+				
+				<dd><a href="#Clean">func Clean(path string) string</a></dd>
+			
+				
+				<dd><a href="#Dir">func Dir(path string) string</a></dd>
+			
+				
+				<dd><a href="#Dir2">func Dir2(path string) string</a></dd>
+			
+				
+				<dd><a href="#EvalSymLinks">func EvalSymLinks(path string) (string, error)</a></dd>
+			
+				
+				<dd><a href="#Exists">func Exists(path string) bool</a></dd>
+			
+				
+				<dd><a href="#Ext">func Ext(path string) string</a></dd>
+			
+				
+				<dd><a href="#FromSlash">func FromSlash(path string) string</a></dd>
+			
+				
+				<dd><a href="#IsAbs">func IsAbs(path string) bool</a></dd>
+			
+				
+				<dd><a href="#IsRoot">func IsRoot(path string) bool</a></dd>
+			
+				
+				<dd><a href="#Join">func Join(elem ...string) string</a></dd>
+			
+				
+				<dd><a href="#Rel">func Rel(basepath, targpath string) (string, error)</a></dd>
+			
+				
+				<dd><a href="#Split">func Split(path string) (string, string)</a></dd>
+			
+				
+				<dd><a href="#Split2">func Split2(path string) (dir, file string)</a></dd>
+			
+				
+				<dd><a href="#SplitList">func SplitList(path string) []string</a></dd>
+			
+				
+				<dd><a href="#ToSlash">func ToSlash(path string) string</a></dd>
+			
+				
+				<dd><a href="#Trim">func Trim(path string) string</a></dd>
+			
+				
+				<dd><a href="#VolumeName">func VolumeName(path string) string</a></dd>
+			
+				
+				<dd><a href="#Walk">func Walk(root string, walkFn WalkFunc) error</a></dd>
+			
+			
+				
+				<dd><a href="#WalkFunc">type WalkFunc</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h4>Package files</h4>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/src/orig.go">orig.go</a>
+			
+				<a href="/src/path.go">path.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		<div id="pkg-callgraph" class="toggle" style="display: none">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Internal Call Graph section">Internal call graph ▹</h2>
+		</div> <!-- .expanded -->
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Internal Call Graph section">Internal call graph ▾</h2>
+			<p>
+			  In the call graph viewer below, each node
+			  is a function belonging to this package
+			  and its children are the functions it
+			  calls&mdash;perhaps dynamically.
+			</p>
+			<p>
+			  The root nodes are the entry points of the
+			  package: functions that may be called from
+			  outside the package.
+			  There may be non-exported or anonymous
+			  functions among them if they are called
+			  dynamically from another package.
+			</p>
+			<p>
+			  Click a node to visit that function's source code.
+			  From there you can visit its callers by
+			  clicking its declaring <code>func</code>
+			  token.
+			</p>
+			<p>
+			  Functions may be omitted if they were
+			  determined to be unreachable in the
+			  particular programs or tests that were
+			  analyzed.
+			</p>
+			<!-- Zero means show all package entry points. -->
+			<ul style="margin-left: 0.5in" id="callgraph-0" class="treeview"></ul>
+		</div>
+		</div> <!-- #pkg-callgraph -->
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				
+				<pre>const <span id="PathSeparatorString">PathSeparatorString</span> = <a href="/pkg/builtin/#string">string</a>(<a href="/pkg/os/">os</a>.<a href="/pkg/os/#PathSeparator">PathSeparator</a>)</pre>
+			
+		
+		
+		
+			
+			
+			<h2 id="Abs">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=3481:3518#L68">Abs</a>
+				<a class="permalink" href="#Abs">&#xb6;</a>
+			</h2>
+			<pre>func Abs(path <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			<p>
+Abs returns an absolute representation of path.
+If the path is not absolute it will be joined with the current
+working directory to turn it into an absolute path. The absolute
+path name for a given file is not guaranteed to be unique.
+Symbolic links in the given path will be resolved, but not in
+the current working directory, if used to make the path absolute.
+The denoted file may not exist.
+Abs never calls Clean on the result, so the resulting path
+will denote the same file as the argument.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Base">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=6573:6602#L209">Base</a>
+				<a class="permalink" href="#Base">&#xb6;</a>
+			</h2>
+			<pre>func Base(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Canonical">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=2251:2306#L41">Canonical</a>
+				<a class="permalink" href="#Canonical">&#xb6;</a>
+			</h2>
+			<pre>func Canonical(path <a href="/pkg/builtin/#string">string</a>, exist <a href="/pkg/builtin/#bool">bool</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			<p>
+Canonical returns the canonical absolute path of a file.
+If exist=false the denoted file must not exist, but
+then the part of the initial path refering to a not existing
+directoy structure is lexically resolved (like Clean) and
+does not consider potential symbolic links that might occur
+if the file is finally created in the future.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Clean">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=328:358#L13">Clean</a>
+				<a class="permalink" href="#Clean">&#xb6;</a>
+			</h2>
+			<pre>func Clean(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Dir">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=6293:6321#L193">Dir</a>
+				<a class="permalink" href="#Dir">&#xb6;</a>
+			</h2>
+			<pre>func Dir(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			<p>
+Dir acts like filepath.Dir, but does not
+clean the path
+Like the original Dir function this is NOT
+the counterpart of Base if the path ends with
+a trailing Separator. Base(&#34;a/b/&#34;)=&#34;b&#34; and
+Dir(&#34;a/b/&#34;) = &#34;a/b&#34;.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Dir2">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=5725:5754#L168">Dir2</a>
+				<a class="permalink" href="#Dir2">&#xb6;</a>
+			</h2>
+			<pre>func Dir2(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			<p>
+Dir2 returns the path&#39;s directory dropping the final element
+after removing trailing Separators, Dir2 goes not call Clean on the path.
+If the path is empty, Dir2 returns &#34;.&#34;.
+If the path consists entirely of Separators, Dir2 returns a single Separator.
+The returned path does not end in a Separator unless it is the root directory.
+This function is the counterpart of Base
+Base(&#34;a/b/&#34;)=&#34;b&#34; and Dir(&#34;a/b/&#34;) = &#34;a&#34;.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="EvalSymLinks">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=2876:2922#L55">EvalSymLinks</a>
+				<a class="permalink" href="#EvalSymLinks">&#xb6;</a>
+			</h2>
+			<pre>func EvalSymLinks(path <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			<p>
+EvalSymLinks resolves all symbolic links in a path
+and returns a path not containing any symbolic link
+anymore. It does not call Clean on a non-canonical path,
+so the result always denotes the same file than the original path.
+If the given path is a relative one, a
+reLative one is returned as long as there is no
+absolute symbolic link and the relative path does
+not goes up the current working diretory.
+If a relative path is returned, symbolic links
+up the current working directory are not resolved.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Exists">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=5134:5163#L152">Exists</a>
+				<a class="permalink" href="#Exists">&#xb6;</a>
+			</h2>
+			<pre>func Exists(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
+			<p>
+Exists checks whether a file exists.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Ext">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=389:417#L17">Ext</a>
+				<a class="permalink" href="#Ext">&#xb6;</a>
+			</h2>
+			<pre>func Ext(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="FromSlash">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=117:151#L1">FromSlash</a>
+				<a class="permalink" href="#FromSlash">&#xb6;</a>
+			</h2>
+			<pre>func FromSlash(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="IsAbs">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=1745:1773#L30">IsAbs</a>
+				<a class="permalink" href="#IsAbs">&#xb6;</a>
+			</h2>
+			<pre>func IsAbs(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
+			<p>
+IsAbs return true if the given path is an absolute one
+starting with a Separator or is quailified by a volume name.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="IsRoot">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=8455:8484#L282">IsRoot</a>
+				<a class="permalink" href="#IsRoot">&#xb6;</a>
+			</h2>
+			<pre>func IsRoot(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
+			<p>
+IsRoot determines whether a given path is a root path.
+This might be the Separator or the Separator preceded by
+a volume name under Windows.
+This function is directly taken from the original filepath
+package.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Join">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=8075:8107#L268">Join</a>
+				<a class="permalink" href="#Join">&#xb6;</a>
+			</h2>
+			<pre>func Join(elem ...<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			<p>
+Join joins any number of path elements into a single path, adding
+a Separator if necessary. Join never calls Clean on the result to
+assure the result denotes the same file as the input.
+On Windows, the result is a UNC path if and only if the first path
+element is a UNC path.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Rel">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=517:568#L25">Rel</a>
+				<a class="permalink" href="#Rel">&#xb6;</a>
+			</h2>
+			<pre>func Rel(basepath, targpath <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Split">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=257:297#L9">Split</a>
+				<a class="permalink" href="#Split">&#xb6;</a>
+			</h2>
+			<pre>func Split(path <a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, <a href="/pkg/builtin/#string">string</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Split2">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=7529:7572#L250">Split2</a>
+				<a class="permalink" href="#Split2">&#xb6;</a>
+			</h2>
+			<pre>func Split2(path <a href="/pkg/builtin/#string">string</a>) (dir, file <a href="/pkg/builtin/#string">string</a>)</pre>
+			<p>
+Split2 splits path immediately following the final Separator,
+separating it into a directory and file name component.
+If there is no Separator in path, Split returns an empty dir
+and file set to path. In contrast to Split the directory
+path does not end with a trailing Separator, so Split2 can
+subsequently called for the directory part, again.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="SplitList">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=186:222#L5">SplitList</a>
+				<a class="permalink" href="#SplitList">&#xb6;</a>
+			</h2>
+			<pre>func SplitList(path <a href="/pkg/builtin/#string">string</a>) []<a href="/pkg/builtin/#string">string</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="ToSlash">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=52:84#L1">ToSlash</a>
+				<a class="permalink" href="#ToSlash">&#xb6;</a>
+			</h2>
+			<pre>func ToSlash(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Trim">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/path.go?s=6997:7026#L233">Trim</a>
+				<a class="permalink" href="#Trim">&#xb6;</a>
+			</h2>
+			<pre>func Trim(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			<p>
+Trim eleminates trailing slashes from a path name.
+An empty path is unchanged.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="VolumeName">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=446:481#L21">VolumeName</a>
+				<a class="permalink" href="#VolumeName">&#xb6;</a>
+			</h2>
+			<pre>func VolumeName(path <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Walk">func <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=791:836#L39">Walk</a>
+				<a class="permalink" href="#Walk">&#xb6;</a>
+			</h2>
+			<pre>func Walk(root <a href="/pkg/builtin/#string">string</a>, walkFn <a href="#WalkFunc">WalkFunc</a>) <a href="/pkg/builtin/#error">error</a></pre>
+			
+			
+			
+
+		
+		
+			
+			
+			<h2 id="WalkFunc">type <a href="/src/github.com/mandelsoft/filepath/pkg/filepath/orig.go?s=762:789#L37">WalkFunc</a>
+				<a class="permalink" href="#WalkFunc">&#xb6;</a>
+			</h2>
+			
+			<pre>type WalkFunc <a href="/pkg/path/filepath/">orig</a>.<a href="/pkg/path/filepath/#WalkFunc">WalkFunc</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+	
+
+	
+
+
+
+
+
