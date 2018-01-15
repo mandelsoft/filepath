@@ -1,0 +1,4 @@
+cmd/abs/abs
+cmd/ojoin/ojoin
+cmd/osyml/osyml
+*.swp

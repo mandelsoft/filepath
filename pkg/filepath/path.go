@@ -35,6 +35,12 @@ import (
 
 const PathSeparatorString = string(os.PathSeparator)
 
+func debug(f string, args ...interface{}) {
+	if false {
+		fmt.Printf(f, args...)
+	}
+}
+
 // IsAbs return true if the given path is an absolute one
 // starting with a Separator or is quailified by a volume name.
 func IsAbs(path string) bool {
@@ -62,7 +68,7 @@ func Canonical(path string, exist bool) (string, error) {
 // not goes up the current working diretory.
 // If a relative path is returned, symbolic links
 // up the current working directory are not resolved.
-func EvalSymLinks(path string) (string, error) {
+func EvalSymlinks(path string) (string, error) {
 	return walk(path, 0, false)
 }
 
@@ -103,12 +109,12 @@ func walk(p string, parent int, exist bool) (string, error) {
 			continue
 		}
 		fi, err := os.Lstat(p)
-		fmt.Printf("debug: %s // %s  %v\n", n, b, err)
+		debug("debug: %s // %s  %v\n", n, b, err)
 		if exists_(err) {
 			if err != nil && !os.IsPermission(err) {
 				return "", err
 			}
-			fmt.Printf("debug: file exists '%s'\n", p)
+			debug("debug: file exists '%s'\n", p)
 			if fi.Mode()&os.ModeSymlink != 0 {
 				newpath, err := os.Readlink(p)
 				if err != nil {
@@ -119,7 +125,7 @@ func walk(p string, parent int, exist bool) (string, error) {
 				} else {
 					p = Join(n, newpath)
 				}
-				fmt.Printf("LINK %s -> %s\n", newpath, p)
+				debug("LINK %s -> %s\n", newpath, p)
 				links++
 				if links > 255 {
 					return "", errors.New("AbsPath: too many links")
@@ -130,7 +136,7 @@ func walk(p string, parent int, exist bool) (string, error) {
 			if exist {
 				return "", err
 			}
-			fmt.Printf("debug: %s does not exist\n", p)
+			debug("debug: %s does not exist\n", p)
 		}
 		if b != "." {
 			rest = append([]string{b}, rest...)
@@ -147,7 +153,7 @@ func walk(p string, parent int, exist bool) (string, error) {
 			if err != nil {
 				return "", err
 			}
-			fmt.Printf("debug: continue with wd '%s'\n", p)
+			debug("debug: continue with wd '%s'\n", p)
 		} else {
 			p = n
 		}
