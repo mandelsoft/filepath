@@ -281,13 +281,18 @@ func Split2(path string) (dir, file string) {
 // assure the result denotes the same file as the input.
 // On Windows, the result is a UNC path if and only if the first path
 // element is a UNC path.
-func Join(elem ...string) string {
-	for i, e := range elem {
-		if e != "" {
-			return strings.Join(elem[i:], string(os.PathSeparator))
+func Join(elems ...string) string {
+	s := string(os.PathSeparator) + string(os.PathSeparator)
+	for i := 0; i < len(elems); i++ {
+		if elems[i] == "" {
+			elems = append(elems[:i], elems[i+1:]...)
 		}
 	}
-	return ""
+	r := strings.Join(elems, string(os.PathSeparator))
+	for strings.Index(r, s) >= 0 {
+		r = strings.ReplaceAll(r, s, string(os.PathSeparator))
+	}
+	return r
 }
 
 // IsRoot determines whether a given path is a root path.

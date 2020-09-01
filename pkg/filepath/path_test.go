@@ -634,4 +634,28 @@ var _ = Describe("filepath package", func() {
 			testNew("root/nested//", "root/nested", "")
 		})
 	})
+
+	Context("function Join", func() {
+		It("joins two stringw", func() {
+			Expect(Join("a", "b")).To(Equal("a/b"))
+		})
+		It("joins slashed", func() {
+			Expect(Join("/a", "/b")).To(Equal("/a/b"))
+		})
+		It("joins slash", func() {
+			Expect(Join("/", "/a")).To(Equal("/a"))
+		})
+		It("joins slashes", func() {
+			Expect(Join("/", "/", "//")).To(Equal("/"))
+		})
+		It("joins empty", func() {
+			Expect(Join("/", "", "")).To(Equal("/"))
+		})
+		It("ignore empty", func() {
+			Expect(Join("", "a", "")).To(Equal("a"))
+		})
+		It("ignore empty", func() {
+			Expect(Join("", "a", "", "b")).To(Equal("a/b"))
+		})
+	})
 })

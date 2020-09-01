@@ -1,3 +1,4 @@
+/.idea
 cmd/abs/abs
 cmd/ojoin/ojoin
 cmd/osyml/osyml
