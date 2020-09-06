@@ -72,6 +72,10 @@ var _ = Describe("filepath package", func() {
 			testNew(".././", "../.")
 		})
 
+		It("empty dir", func() {
+			testUnchanged("a/b/c/", "a/b/c")
+		})
+
 		// tagged nested
 		It("tagged", func() {
 			testUnchanged("root/", "root")
@@ -180,6 +184,7 @@ var _ = Describe("filepath package", func() {
 		}
 		testNew := func(path, result string) {
 			Expect(Dir2(FromSlash(path))).To(Equal(FromSlash(result)))
+			Expect(Trim(Join(Dir2(FromSlash(path)), Base(FromSlash(path))))).To(Equal(Trim(FromSlash(path))))
 		}
 
 		//
@@ -235,6 +240,10 @@ var _ = Describe("filepath package", func() {
 		})
 		It("tagged parent dot", func() {
 			testNew(".././", "..")
+		})
+
+		It("empty dir", func() {
+			testNew("a/b/c/", "a/b")
 		})
 
 		// tagged nested
@@ -335,6 +344,26 @@ var _ = Describe("filepath package", func() {
 
 		It("tagged root double nested", func() {
 			testNew("/root/nested/", "/root")
+		})
+
+		It("combinations", func() {
+			parts := []string{"file", "/", ".", ".."}
+			type check func([]string)
+
+			level := func(f check) check {
+				return func(segments []string) {
+					for _, s := range parts {
+						next := append(segments, s)
+						f(next)
+					}
+				}
+			}
+			level(level(level(level(func(segments []string) {
+				path := Join(segments...)
+				//fmt.Printf("trimming %q\n", path)
+				Expect(Trim(Join(Dir2(path), Base(path)))).To(Equal(Trim(path)))
+			}))))([]string{})
+
 		})
 	})
 	Context("function Base", func() {
@@ -546,6 +575,24 @@ var _ = Describe("filepath package", func() {
 		})
 		It("double tagged nested", func() {
 			testNew("nested//", "nested")
+		})
+		It("double slashes", func() {
+			testNew("//dir//nested//", "/dir/nested")
+		})
+
+		It("eliminated intermediate dot segments in absolute path", func() {
+			testNew("/./a/.", "/a")
+			testNew("/../a/.", "/../a")
+			testNew("/.", "/")
+			testNew("//.", "/")
+			testNew("//.//", "/")
+		})
+		It("eliminated intermediate dot segments in relative path", func() {
+			testNew("././a/.", "a")
+			testNew("./../a/.", "../a")
+		})
+		It("eliminated intermediate dot segments but not a single one", func() {
+			testNew(".", ".")
 		})
 	})
 

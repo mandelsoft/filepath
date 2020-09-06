@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"path/filepath"
+	"github.com/mandelsoft/filepath/pkg/filepath"
 )
 
 func main() {
