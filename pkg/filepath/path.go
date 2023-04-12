@@ -250,7 +250,6 @@ func Base(path string) string {
 
 // Trim eleminates additional slashes and dot segments from a path name.
 // An empty path is unchanged.
-//
 func Trim(path string) string {
 	vol := VolumeName(path)
 	i := len(path) - 1

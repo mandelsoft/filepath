@@ -49,6 +49,11 @@ func Rel(basepath, targpath string) (string, error) {
 // as an error by any function.
 var SkipDir = orig.SkipDir
 
+// SkipAll is used as a return value from WalkFuncs to indicate that
+// all remaining files and directories are to be skipped. It is not returned
+// as an error by any function.
+// var SkipAll = orig.SkipAll
+
 // WalkFunc is the type of the function called for each file or directory
 // visited by Walk. The path argument contains the argument to Walk as a
 // prefix; that is, if Walk is called with "dir", which is a directory
@@ -68,4 +73,14 @@ type WalkFunc orig.WalkFunc
 
 func Walk(root string, walkFn WalkFunc) error {
 	return orig.Walk(root, orig.WalkFunc(walkFn))
+}
+
+var ErrBadPattern = orig.ErrBadPattern
+
+func Match(pattern, name string) (matched bool, err error) {
+	return orig.Match(pattern, name)
+}
+
+func Glob(pattern string) (matches []string, err error) {
+	return orig.Glob(pattern)
 }
