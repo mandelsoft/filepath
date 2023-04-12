@@ -37,6 +37,10 @@ func Rel(basepath, targpath string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	targpath, err = Canonical(targpath, false)
+	if err != nil {
+		return "", err
+	}
 	targpath, err = EvalSymlinks(targpath)
 	if err != nil {
 		return "", err
