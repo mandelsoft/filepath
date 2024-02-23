@@ -4,6 +4,10 @@ import (
 	orig "path/filepath"
 )
 
+func IsAbs(path string) bool {
+	return orig.IsAbs(path)
+}
+
 func ToSlash(path string) string {
 	return orig.ToSlash(path)
 }

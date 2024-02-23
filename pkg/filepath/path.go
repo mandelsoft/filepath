@@ -41,13 +41,6 @@ func debug(f string, args ...interface{}) {
 	}
 }
 
-// IsAbs return true if the given path is an absolute one
-// starting with a Separator or is quailified by a volume name.
-func IsAbs(path string) bool {
-	return strings.HasPrefix(path, PathSeparatorString) ||
-		strings.HasPrefix(path, VolumeName(path)+PathSeparatorString)
-}
-
 // Canonical returns the canonical absolute path of a file.
 // If exist=false the denoted file must not exist, but
 // then the part of the initial path refering to a not existing
